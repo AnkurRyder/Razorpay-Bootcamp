@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/csv"
+	"flag"
 	"fmt"
 	"io"
 	"os"
@@ -14,8 +15,8 @@ type user struct {
 }
 
 func main() {
-	filename := "../problem.csv"
-	reader := readproblem(filename)
+	filename := flag.String("filename", "../problem.csv", "a string")
+	reader := readproblem(*filename)
 	var person user
 	person.userinput()
 	person.quiz(reader)
