@@ -16,6 +16,7 @@ type user struct {
 
 func main() {
 	filename := flag.String("filename", "../problem.csv", "a string")
+	flag.Parse()
 	reader := readproblem(*filename)
 	var person user
 	person.userinput()
@@ -36,6 +37,7 @@ func readproblem(filename string) *csv.Reader {
 
 	if err != nil {
 		fmt.Println("Could not open the problem file", err)
+		os.Exit(1)
 	}
 
 	reader := csv.NewReader(csvfile)
