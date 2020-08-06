@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"encoding/csv"
 	"flag"
 	"fmt"
@@ -17,11 +18,13 @@ type user struct {
 
 func main() {
 	filename := flag.String("filename", "../problem.csv", "a string")
+	time := flag.String("time", "30s", "a string")
 	flag.Parse()
+	totalTime := *time
 	reader := readproblem(*filename)
 	var person user
 	person.userinput()
-	person.quiz(reader)
+	person.quiz(reader, totalTime)
 	person.printResult()
 }
 
@@ -46,11 +49,13 @@ func readproblem(filename string) *csv.Reader {
 	return reader
 }
 
-func (person *user) quiz(reader *csv.Reader) {
+func (person *user) quiz(reader *csv.Reader, totalTime string) {
 	i := 1
 	var ans string
 	c := make(chan string)
-	go timer(c)
+	fmt.Print("Press 'Enter' to continue...")
+	bufio.NewReader(os.Stdin).ReadBytes('\n')
+	go timer(c, totalTime)
 
 	for {
 		problem, err := reader.Read()
@@ -63,8 +68,7 @@ func (person *user) quiz(reader *csv.Reader) {
 		fmt.Println("Q", i, ": ", problem[0])
 
 		go takeInput(c)
-
-		fmt.Println(ans)
+		ans = <-c
 		if ans == "EOT" {
 			break
 		}
@@ -80,10 +84,9 @@ func (person *user) quiz(reader *csv.Reader) {
 	}
 }
 
-func timer(c chan string) {
-
+func timer(c chan string, total string) {
+	totalTime, _ := time.ParseDuration(total)
 	start := time.Now()
-	totalTime, _ := time.ParseDuration("10000ms")
 	for {
 		t := time.Now()
 		elapsed := t.Sub(start)
