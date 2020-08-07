@@ -16,18 +16,19 @@ limitations under the License.
 package cmd
 
 import (
+	"CLI/db"
 	"fmt"
 	"strconv"
-	"github.com/spf13/cobra"
 	"strings"
-	"CLI/db"
+
+	"github.com/spf13/cobra"
 )
 
 // doCmd represents the do command
 var doCmd = &cobra.Command{
 	Use:   "do",
 	Short: "To remove task from the list",
-	Long: ``,
+	Long:  `To remove a task from the list use CLI -do {Serial Number} command`,
 	Run: func(cmd *cobra.Command, args []string) {
 		key, err := strconv.Atoi(strings.Join(args, ""))
 		if err != nil {
@@ -42,9 +43,8 @@ var doCmd = &cobra.Command{
 		if key <= 0 || key > len(tasks) {
 			fmt.Println("Wrong Id please check it again")
 			return
-		}else{
-			err = db.RemoveTask(tasks[key-1].Key)
 		}
+		err = db.RemoveTask(tasks[key-1].Key)
 		if err != nil {
 			fmt.Println(err)
 			return

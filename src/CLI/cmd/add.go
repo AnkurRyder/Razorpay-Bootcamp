@@ -16,18 +16,18 @@ limitations under the License.
 package cmd
 
 import (
+	"CLI/db"
+	"fmt"
+	"strings"
 
 	"github.com/spf13/cobra"
-	"fmt"
-	"CLI/db"
-	"strings"
 )
 
 // addCmd represents the add command
 var addCmd = &cobra.Command{
 	Use:   "add",
 	Short: "You can use it to add tasks to the list",
-	Long: `Use go run main.go add {Your task} to add your task to the list`,
+	Long:  `Use go CLI -add {Your task} to add your task to the list`,
 	Run: func(cmd *cobra.Command, args []string) {
 		task := strings.Join(args, " ")
 		_, err := db.AddTask(task)

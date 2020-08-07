@@ -16,8 +16,9 @@ limitations under the License.
 package cmd
 
 import (
-	"fmt"
 	"CLI/db"
+	"fmt"
+
 	"github.com/spf13/cobra"
 )
 
@@ -25,7 +26,7 @@ import (
 var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "To see list of task needs to be done",
-	Long: `To see list of tasks use command go run main.go list`,
+	Long:  `To see list of tasks use command CLI -list`,
 	Run: func(cmd *cobra.Command, args []string) {
 		tasks, err := db.ListAllTasks()
 		if err != nil {
@@ -33,7 +34,7 @@ var listCmd = &cobra.Command{
 			return
 		}
 		for i, task := range tasks {
-			fmt.Println(i+1,":", task.Value)
+			fmt.Println(i+1, ":", task.Value)
 		}
 	},
 }
