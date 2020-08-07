@@ -1,0 +1,10 @@
+[
+    { 
+        "path" : "/q1" , 
+        "url": "https://github.com/AnkurRyder/Razorpay-Bootcamp/tree/master/Quiz_Game"
+    },
+    { 
+        "path": "/q2", 
+        "url": "https://github.com/AnkurRyder/Razorpay-Bootcamp/tree/master/src/urlshort"
+    }
+]
