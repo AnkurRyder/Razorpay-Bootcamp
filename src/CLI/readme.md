@@ -9,3 +9,5 @@ $ go install
 * $ CLI -add {task}
 * $ CLI -list
 * $ CLI -do {task number}
+
+## Make sure you have added your {cwd} to $GOPATH
