@@ -16,16 +16,15 @@ limitations under the License.
 package main
 
 import (
+	"CLI/cmd"
+	"CLI/db"
 	"os"
 	"path/filepath"
-	homedir "github.com/mitchellh/go-homedir"
-	"CLI/db"
-	"CLI/cmd"
 )
 
 func main() {
-	home, _ := homedir.Dir()
-	dbPath := filepath.Join(home, "tasks.db")
+	home, _ := os.Getwd()
+	dbPath := filepath.Join(home, "db/tasks.db")
 	err := db.Init(dbPath)
 	if err != nil {
 		os.Exit(1)
