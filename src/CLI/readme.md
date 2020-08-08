@@ -11,3 +11,15 @@ $ go install
 * $ CLI -do {task number}
 
 ## Make sure you have added your {cwd} to $GOPATH
+
+## Go module added now no need to change/add $GOPATH
+
+## To get executable run
+
+$ go build
+
+## To run the program now use following
+
+* $ CLI.exe add {task}
+* $ CLI.exe list
+* $ CLI.exe do {task number}
